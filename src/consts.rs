@@ -8,8 +8,12 @@ pub const RAND_IS_NULL      : usize = 0xE004;
 pub const LENGTH_ERROR      : usize = 0xE005;
 pub const POINT_AT_INFINITY : usize = 0xE006;
 pub const MESSAGE_ILLEGAL   : usize = 0xE007;
+
 pub const HASH_UNKNOWN_TYPE : usize = 0xE008;
 pub const HMAC_UNKNOWN_TYPE : usize = 0xE009;
+pub const ECC_PRIVATE_KEY_LENGTH_ERROR :usize = 0xE00A;
+pub const ECC_MESSAGE_LENGTH_ERROR :usize = 0xE00B;
+pub const ECC_UNKNOWN_TYPE  :usize = 0xE00C;
 
 pub const HASH_ALG_SHA1               : usize = 0xA0000000;
 pub const HASH_ALG_SHA3_256           : usize = 0xA0000001;
@@ -33,3 +37,14 @@ pub const HASH_ALG_SHA3_512           : usize = 0xA0000012;
 
 pub const HMAC_SHA256_ALG    : usize = 0x50505050;
 pub const HMAC_SHA512_ALG    : usize = 0x50505051;
+
+
+pub const ECC_CURVE_SECP256K1         : usize = 0xECC00000;
+pub const ECC_CURVE_SECP256R1         : usize = 0xECC00001;
+pub const ECC_CURVE_PRIMEV1           : usize = ECC_CURVE_SECP256R1;
+pub const ECC_CURVE_NIST_P256         : usize = ECC_CURVE_SECP256R1;
+pub const ECC_CURVE_SM2_STANDARD      : usize = 0xECC00002;
+pub const ECC_CURVE_ED25519_NORMAL    : usize = 0xECC00003;
+pub const ECC_CURVE_ED25519           : usize = 0xECC00004;
+pub const ECC_CURVE_X25519            : usize = 0xECC00005;
+pub const ECC_CURVE_CURVE25519_SHA256 : usize = 0xECC00006;
