@@ -1,7 +1,13 @@
 [package]
 name = "owcrypt"
+license = "GNU"
 version = "0.1.0"
 authors = ["heshuchao <heshuchao@hotmail.com>"]
+build = "build.rs"
+description = "Rust version for BlockTree's owcrypt library"
+homepage = "https://github.com/blocktree/"
+
+repository = "https://github.com/Brochao/rust-owcrypt"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
