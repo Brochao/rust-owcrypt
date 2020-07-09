@@ -1,7 +1,7 @@
 [package]
 name = "owcrypt"
 license = "GNU"
-version = "0.1.0"
+version = "0.0.1"
 authors = ["heshuchao <heshuchao@hotmail.com>"]
 build = "build.rs"
 description = "Rust version for BlockTree's owcrypt library"
