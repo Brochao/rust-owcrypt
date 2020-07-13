@@ -1,7 +1,7 @@
 [package]
 name = "owcrypt"
 license = "GPL-3.0"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["heshuchao <heshuchao@hotmail.com>"]
 build = "build.rs"
 readme = "README.md"
