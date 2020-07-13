@@ -117,7 +117,7 @@ void sm2_get_e(ECC_CURVE_PARAM *curveParam, uint8_ow *ID, uint16_ow IDlen, uint8
 uint8_ow testrand[32] = {0x94, 0xeb, 0x98, 0x3c, 0x9b, 0x63, 0xd4, 0x59, 0xb6, 0xd3, 0x34, 0xce, 0x8d, 0x69, 0x51, 0x3e, 0x33, 0x11, 0x49, 0x16, 0xf5, 0xda, 0x01, 0x23, 0x38, 0x15, 0x83, 0x6c, 0x1b, 0x26, 0xb5, 0x74};
 
 
-uint16_ow sm2_std_sign(uint8_ow *prikey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len,uint8_ow *rand,uint8_ow hash_flag, uint8_ow *sig)
+uint16_ow sm2_std_sign(uint8_ow *prikey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len, uint8_ow *sig)
 {
     ECC_CURVE_PARAM *curveParam = NULL;
     ECC_POINT *point = NULL;
@@ -139,32 +139,14 @@ uint16_ow sm2_std_sign(uint8_ow *prikey, uint8_ow *ID, uint16_ow IDlen, uint8_ow
     e = calloc(ECC_LEN, sizeof(uint8_ow));
     k = calloc(ECC_LEN, sizeof(uint8_ow));
     tmp = calloc(ECC_LEN, sizeof(uint8_ow));
-    if(!hash_flag)//需要内部计算哈希值
-    {
-        sm2_get_e(curveParam, ID, IDlen, prikey, message, message_len, 0, e);
-    }
-    else //外部已经计算哈希值
-    {
-        if(message_len != ECC_LEN)
-        {
-            return LENGTH_ERROR;
-        }
-        else
-        {
-            memcpy(e, message, message_len);
-        }
-    }
+
+    sm2_get_e(curveParam, ID, IDlen, prikey, message, message_len, 0, e);
+
     while(1)
     {
-        if(rand==NULL) //内部产生随机数
-        {
-            bigrand_get_rand_range(k, curveParam -> n, prikey, ECC_LEN, message, message_len);
-            memcpy(k, testrand, ECC_LEN);
-        }
-        else //外部传入随机数
-        {
-            memcpy(k,rand,ECC_LEN);
-        }
+        bigrand_get_rand_range(k, curveParam -> n, prikey, ECC_LEN, message, message_len);
+        memcpy(k, testrand, ECC_LEN);
+
         memcpy(point -> x, curveParam -> x, ECC_LEN);
         memcpy(point -> y, curveParam -> y, ECC_LEN);
         point_mul(curveParam, point, k, point);
@@ -195,7 +177,7 @@ uint16_ow sm2_std_sign(uint8_ow *prikey, uint8_ow *ID, uint16_ow IDlen, uint8_ow
     return SUCCESS;
 }
 
-uint16_ow sm2_std_verify(uint8_ow *pubkey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len, uint8_ow hash_flag,uint8_ow *sig)
+uint16_ow sm2_std_verify(uint8_ow *pubkey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len, uint8_ow *sig)
 {
     ECC_CURVE_PARAM *curveParam = NULL;
     ECC_POINT *point1 = NULL, *point2 = NULL;
@@ -239,20 +221,9 @@ uint16_ow sm2_std_verify(uint8_ow *pubkey, uint8_ow *ID, uint16_ow IDlen, uint8_
     }
     
     e = calloc(ECC_LEN, sizeof(uint8_ow));
-    if(!hash_flag)//需要内部计算哈希值
-    {
-       sm2_get_e(curveParam, ID, IDlen, pubkey, message, message_len, 1, e);
-    }
-    else//外部已经计算哈希值
-    {
-        if(message_len != ECC_LEN)
-        {
-            return LENGTH_ERROR;
-        }
-        memcpy(e,message,message_len);
-    }
-    
-    
+
+    sm2_get_e(curveParam, ID, IDlen, pubkey, message, message_len, 1, e);
+
     point2 = calloc(1, sizeof(ECC_POINT));
     memcpy(point2 -> x, curveParam -> x, ECC_LEN);
     memcpy(point2 -> y, curveParam -> y, ECC_LEN);

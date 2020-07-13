@@ -38,64 +38,90 @@ uint16_ow ECDSA_genPubkey(ECC_CURVE_PARAM *curveParam, uint8_ow *prikey, ECC_POI
 }
 
 
-
-uint16_ow ECDSA_sign(ECC_CURVE_PARAM *curveParam, uint8_ow *prikey, uint8_ow *message, uint16_ow message_len,uint8_ow *rand, uint8_ow hash_flag, uint8_ow *sig)
+uint16_ow ECDSA_sign(ECC_CURVE_PARAM *curveParam, uint8_ow *prikey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig, uint8_ow *v)
 {
-    uint8_ow *k = NULL, *tmp = NULL;
+    uint8_ow *k = NULL, *tmp = NULL, *tmp_k = NULL;
+    uint32_ow offset = (uint32_ow)(*prikey % 32) | 4;
     ECC_POINT *point = NULL;
     if(!is_prikey_legal(curveParam, prikey))
         return ECC_PRIKEY_ILLEGAL;
     k = calloc(ECC_LEN, sizeof(uint8_ow));
     tmp = calloc(ECC_LEN, sizeof(uint8_ow));
+    tmp_k = calloc(ECC_LEN, sizeof(uint8_ow));
+
     point = calloc(1, sizeof(ECC_POINT));
+    
+    bigrand_get_rand_range(tmp_k, curveParam -> n, prikey, ECC_LEN, message, message_len);
+    
     while(1)
     {
         memcpy(point -> x, curveParam -> x, ECC_LEN);
         memcpy(point -> y, curveParam -> y, ECC_LEN);
+        memcpy(k, tmp_k, ECC_LEN);
         
-        if(rand==NULL)
-        {
-            bigrand_get_rand_range(k, curveParam -> n, prikey, ECC_LEN, message, message_len);
-        }
-        else
-        {
-            memcpy(k,rand,ECC_LEN);
-        }
         point_mul(curveParam, point, k, point);
         bignum_mod(point -> x, curveParam -> n, sig);
         if(is_all_zero(sig, ECC_LEN))
+        {
+            *(uint32_ow *)(tmp_k + offset) += 1;
             continue;
-        if(!hash_flag)//传入的是消息
-        {
-            sha256_hash(message, message_len, tmp);
-        }
-        else//传入的是哈希值
-        {
-            if(message_len != ECC_LEN)
+        } else {
+            if(!(((*sig & 0x80) == 0) && !((*sig) == 0  && ((*sig & 0x80) == 0))))
             {
-                return LENGTH_ERROR;
+                *(uint32_ow *)(tmp_k + offset) += 1;
+                continue;
             }
-            else
+            
+            if(*(sig + 31) % 2 == 1)
             {
-                 memcpy(tmp, message, message_len);
+                *v = 1;
+            } else {
+                *v = 0;
             }
         }
+
+        if(message_len != ECC_LEN)
+        {
+            return LENGTH_ERROR;
+        }
+        else
+        {
+             memcpy(tmp, message, message_len);
+        }
+        
         bignum_mod_mul(prikey, sig, curveParam -> n, sig + ECC_LEN);
         bignum_mod_add(tmp, sig + ECC_LEN, curveParam -> n, tmp);
         bignum_mod_inv(k, curveParam -> n, k);
         bignum_mod_mul(k, tmp, curveParam -> n, sig + ECC_LEN);
         if(is_all_zero(sig + ECC_LEN, ECC_LEN))
+        {
+            *(uint32_ow *)(tmp_k + offset) += 1;
             continue;
+        }
         else
+        {
+            if(bignum_cmp(sig + ECC_LEN, ECC_LEN, curveParam -> half, ECC_LEN) > 0)
+            {
+                bignum_sub(curveParam -> n, sig + ECC_LEN, ECC_LEN, sig + ECC_LEN);
+                *v ^= 1;
+            }
+            
+            if (!(((*(sig + ECC_LEN )& 0x80) == 0) && !((*(sig + ECC_LEN )& 0x80) == 0  && (((*(sig + ECC_LEN + 1)& 0x80) & 0x80) == 0))))
+            {
+                *(uint32_ow *)(tmp_k + offset) += 1;
+                continue;
+            }
             break;
+        }
     }
     free(k);
     free(tmp);
     free(point);
+    free(tmp_k);
     return SUCCESS;
 }
 
-uint16_ow ECDSA_verify(ECC_CURVE_PARAM *curveParam, ECC_POINT *pubkey, uint8_ow *message, uint16_ow message_len,uint8_ow hash_flag, uint8_ow *sig)
+uint16_ow ECDSA_verify(ECC_CURVE_PARAM *curveParam, ECC_POINT *pubkey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig)
 {
     uint8_ow *tmp1 = NULL, *tmp2 = NULL;
     ECC_POINT *point1 = NULL, *point2 = NULL;
@@ -109,18 +135,13 @@ uint16_ow ECDSA_verify(ECC_CURVE_PARAM *curveParam, ECC_POINT *pubkey, uint8_ow 
     tmp2 = calloc(ECC_LEN, sizeof(uint8_ow));
     point1 = calloc(1, sizeof(ECC_POINT));
     point2 = calloc(1, sizeof(ECC_POINT));
-    if(!hash_flag) //需要内部计算哈希值
+
+    if(message_len != ECC_LEN)
     {
-        sha256_hash(message, message_len, tmp1);
+        return LENGTH_ERROR;
     }
-    else//外部已经计算哈希值
-    {
-        if(message_len != ECC_LEN)
-        {
-            return LENGTH_ERROR;
-        }
-        memcpy(tmp1,message,message_len);
-    }
+    memcpy(tmp1,message,message_len);
+    
     
     bignum_mod_inv(sig + ECC_LEN, curveParam -> n, tmp2);
     bignum_mod_mul(tmp1, tmp2, curveParam -> n, tmp1);
@@ -233,7 +254,7 @@ uint16_ow ECDSA_recover_public(ECC_CURVE_PARAM *curveParam,uint8_ow *sig,uint32_
         bignum_sub(curveParam->p, point2->y, ECC_LEN ,  point2->y);
         point_add(curveParam, point1,  point2,  point1);
         point_mul(curveParam, point1, r_inv,  point2);
-        ret=ECDSA_verify(curveParam,  point2, hash,  32, 1,  sig);
+        ret=ECDSA_verify(curveParam,  point2, hash,  32,  sig);
         if(ret==SUCCESS)
         {
             memcpy(pubkey,point2->x,ECC_LEN);

@@ -28,9 +28,9 @@ void sm2_std_get_order(uint8_ow *order);
 
 uint16_ow sm2_std_genPubkey(uint8_ow *prikey, uint8_ow *pubkey);
 //uint16_ow sm2_std_sign(uint8_ow *prikey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len, uint8_ow *sig);
-uint16_ow sm2_std_sign(uint8_ow *prikey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len,uint8_ow *rand,uint8_ow hash_flag, uint8_ow *sig);
+uint16_ow sm2_std_sign(uint8_ow *prikey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len, uint8_ow *sig);
 //uint16_ow sm2_std_verify(uint8_ow *pubkey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len, uint8_ow *sig);
-uint16_ow sm2_std_verify(uint8_ow *pubkey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len, uint8_ow hash_flag,uint8_ow *sig);
+uint16_ow sm2_std_verify(uint8_ow *pubkey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len,uint8_ow *sig);
 uint16_ow sm2_std_enc(uint8_ow *pubkey, uint8_ow *plain, uint16_ow plain_len, uint8_ow *cipher, uint16_ow *cipher_len);
 uint16_ow sm2_std_dec(uint8_ow *prikey, uint8_ow *cipher, uint16_ow cipher_len, uint8_ow *plain, uint16_ow *plain_len);
 

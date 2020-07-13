@@ -22,6 +22,7 @@ static const uint8_ow curve_secp256r1_b[32] = {0x5A,0xC6,0x35,0xD8,0xAA,0x3A,0x9
 static const uint8_ow curve_secp256r1_x[32] = {0x6B,0x17,0xD1,0xF2,0xE1,0x2C,0x42,0x47,0xF8,0xBC,0xE6,0xE5,0x63,0xA4,0x40,0xF2,0x77,0x03,0x7D,0x81,0x2D,0xEB,0x33,0xA0,0xF4,0xA1,0x39,0x45,0xD8,0x98,0xC2,0x96};
 static const uint8_ow curve_secp256r1_y[32] = {0x4f,0xe3,0x42,0xe2,0xfe,0x1a,0x7f,0x9b,0x8e,0xe7,0xeb,0x4a,0x7c,0x0f,0x9e,0x16,0x2b,0xce,0x33,0x57,0x6b,0x31,0x5e,0xce,0xcb,0xb6,0x40,0x68,0x37,0xbf,0x51,0xf5};
 static const uint8_ow curve_secp256r1_n[32] = {0xFF,0xFF,0xFF,0xFF,0x00,0x00,0x00,0x00,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xBC,0xE6,0xFA,0xAD,0xA7,0x17,0x9E,0x84,0xF3,0xB9,0xCA,0xC2,0xFC,0x63,0x25,0x51};
+static const uint8_ow curve_secp256r1_half[32] = {127,255,255,255,128,0,0,0,127,255,255,255,255,255,255,255,222,115,125,86,211,139,207,66,121,220,229,97,126,49,146,168};
 
 void secp256r1_get_order(uint8_ow *order)
 {
@@ -55,7 +56,7 @@ uint16_ow secp256r1_genPubkey(uint8_ow *prikey, uint8_ow *pubkey)
 }
 
 
-uint16_ow secp256r1_sign(uint8_ow *prikey, uint8_ow *message, uint16_ow message_len,uint8_ow *rand,uint8_ow hash_flag, uint8_ow *sig)
+uint16_ow secp256r1_sign(uint8_ow *prikey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig, uint8_ow *v)
 {
     uint16_ow ret = 0;
     ECC_CURVE_PARAM *curveParam = NULL;
@@ -68,8 +69,9 @@ uint16_ow secp256r1_sign(uint8_ow *prikey, uint8_ow *message, uint16_ow message_
     curveParam -> x = (uint8_ow *)curve_secp256r1_x;
     curveParam -> y = (uint8_ow *)curve_secp256r1_y;
     curveParam -> n = (uint8_ow *)curve_secp256r1_n;
+    curveParam -> half = (uint8_ow *)curve_secp256r1_half;
     
-    ret = ECDSA_sign(curveParam, prikey, message, message_len, rand,hash_flag,sig);
+    ret = ECDSA_sign(curveParam, prikey, message, message_len, sig, v);
     
     free(curveParam);
     return ret;
@@ -77,7 +79,7 @@ uint16_ow secp256r1_sign(uint8_ow *prikey, uint8_ow *message, uint16_ow message_
 
 
 
-uint16_ow secp256r1_verify(uint8_ow *pubkey, uint8_ow *message, uint16_ow message_len,uint8_ow hash_flag, uint8_ow *sig)
+uint16_ow secp256r1_verify(uint8_ow *pubkey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig)
 {
     uint16_ow ret = 0;
     ECC_CURVE_PARAM *curveParam = NULL;
@@ -96,7 +98,7 @@ uint16_ow secp256r1_verify(uint8_ow *pubkey, uint8_ow *message, uint16_ow messag
     memcpy(point -> x, pubkey, ECC_LEN);
     memcpy(point -> y, pubkey + ECC_LEN, ECC_LEN);
     
-    ret = ECDSA_verify(curveParam, point, message, message_len,hash_flag, sig);
+    ret = ECDSA_verify(curveParam, point, message, message_len, sig);
     
     free(curveParam);
     free(point);

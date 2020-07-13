@@ -25,8 +25,8 @@
 
 uint16_ow ECDSA_genPubkey(ECC_CURVE_PARAM *curveParam, uint8_ow *prikey, ECC_POINT *pubkey);
 //uint16_ow ECDSA_sign(ECC_CURVE_PARAM *curveParam, uint8_ow *prikey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig);
-uint16_ow ECDSA_sign(ECC_CURVE_PARAM *curveParam, uint8_ow *prikey, uint8_ow *message, uint16_ow message_len,uint8_ow *rand, uint8_ow hash_flag, uint8_ow *sig);
+uint16_ow ECDSA_sign(ECC_CURVE_PARAM *curveParam, uint8_ow *prikey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig, uint8_ow *v);
 //uint16_ow ECDSA_verify(ECC_CURVE_PARAM *curveParam, ECC_POINT *pubkey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig);
-uint16_ow ECDSA_verify(ECC_CURVE_PARAM *curveParam, ECC_POINT *pubkey, uint8_ow *message, uint16_ow message_len,uint8_ow hash_flag, uint8_ow *sig);
+uint16_ow ECDSA_verify(ECC_CURVE_PARAM *curveParam, ECC_POINT *pubkey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig);
 uint16_ow ECDSA_recover_public(ECC_CURVE_PARAM *curveParam,uint8_ow *sig,uint32_ow sig_len,uint8_ow *msg,uint32_ow msg_len,uint8_ow hash_flag,uint8_ow *pubkey);
 #endif /* ECDSA_h */

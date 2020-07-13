@@ -4,6 +4,7 @@ license = "GPL-3.0"
 version = "0.0.1"
 authors = ["heshuchao <heshuchao@hotmail.com>"]
 build = "build.rs"
+readme = "README.md"
 description = "Rust version for BlockTree's owcrypt library"
 homepage = "https://github.com/blocktree/"
 
@@ -25,7 +26,6 @@ blake = "2.0.1"
 hmac-sha256 = "0.1.2"
 hmac-sha512 = "0.1.6"
 libc = "0.2"
-
 
 
 [build-dependencies]

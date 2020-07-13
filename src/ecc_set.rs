@@ -3,10 +3,10 @@ use crate::consts;
 use libc::{
     uintptr_t,
     c_uint,
-   // c_ushort
+    c_uchar,
+    c_ushort
 };
 use crate::consts::{ECC_PRIVATE_KEY_LENGTH_ERROR, ECC_MESSAGE_LENGTH_ERROR, ECC_MISS_ID};
-use std::os::raw::c_ushort;
 use std::borrow::BorrowMut;
 
 pub fn generate_public_key_from_private_key(private_key: & [u8], type_choose: usize) -> Result<Box<Vec<u8>>, usize> {
@@ -60,7 +60,7 @@ impl OW_signature {
     }
 }
 
-pub fn signature(private_key: & [u8], id: & [u8], message: & [u8], type_choose: usize) -> Result<Box<OW_signature>, usize> {
+pub fn sign(private_key: & [u8], id: & [u8], message: & [u8], type_choose: usize) -> Result<Box<OW_signature>, usize> {
     if private_key.len() != 32 {
         Err(ECC_PRIVATE_KEY_LENGTH_ERROR)
     } else if ((type_choose == consts::ECC_CURVE_SECP256K1 || type_choose == consts::ECC_CURVE_SECP256R1
@@ -71,6 +71,7 @@ pub fn signature(private_key: & [u8], id: & [u8], message: & [u8], type_choose: 
         Err(ECC_MISS_ID)
     } else {
         let sig: [u8; 64] = [0; 64];
+        let ret_v:u8 = 0;
         let ret_code = unsafe {
             ffi::ECC_sign(private_key.as_ptr() as uintptr_t,
                           id.as_ptr() as uintptr_t,
@@ -78,13 +79,14 @@ pub fn signature(private_key: & [u8], id: & [u8], message: & [u8], type_choose: 
                           message.as_ptr() as usize,
                           32,
                           sig.as_ptr() as uintptr_t,
+                          &ret_v as *const c_uchar as uintptr_t,
                           type_choose as c_uint)
         };
 
         if ret_code as usize != consts::SUCCESS {
             Err(ret_code as usize)
         } else {
-            Ok(Box::new(OW_signature{ signature: sig, v: 0 }))
+            Ok(Box::new(OW_signature{ signature: sig, v: ret_v }))
         }
     }
 
@@ -423,6 +425,186 @@ pub fn ECKA_responder_step2(s_initiator: & [u8], s_responder: & [u8], type_choos
             false
         } else {
             true
+        }
+    }
+}
+
+pub fn point_multiply_G(scalar: & [u8], type_choose: usize) -> Result<Box<Vec<u8>>, usize> {
+    if scalar.len() != 32 {
+        Err(consts::LENGTH_ERROR)
+    } else {
+        match type_choose {
+            consts::ECC_CURVE_SECP256K1 | consts::ECC_CURVE_SECP256R1 => {
+                let point:[u8; 64] = [0; 64];
+                let point_result:[u8;33] = [0; 33];
+                let ret_code = unsafe {
+                    ffi::ECC_point_mul_baseG(scalar.as_ptr() as uintptr_t, point.as_ptr() as uintptr_t, type_choose as c_uint)
+                };
+
+                if ret_code as usize != consts::SUCCESS {
+                    Err(ret_code as usize)
+                } else {
+                    let ret_code = unsafe {
+                        ffi::ECC_point_compress(point.as_ptr() as uintptr_t, 64, point_result.as_ptr() as uintptr_t, type_choose as c_uint)
+                    };
+                    if ret_code as usize != consts::SUCCESS {
+                        Err(ret_code as usize)
+                    } else {
+                        Ok(Box::new(point_result.to_vec()))
+                    }
+                }
+            }
+
+            consts::ECC_CURVE_ED25519 => {
+                let point:[u8;32] = [0;32];
+                let ret_code = unsafe {
+                    ffi::ECC_point_mul_baseG(scalar.as_ptr() as uintptr_t, point.as_ptr() as uintptr_t, type_choose as c_uint)
+                };
+                if ret_code as usize != consts::SUCCESS {
+                    Err(ret_code as usize)
+                } else {
+                    Ok(Box::new(point.to_vec()))
+                }
+            }
+            _ => Err(consts::ECC_WRONG_TYPE)
+        }
+    }
+}
+
+pub fn point_multiply_G_add(point_in: & [u8], scalar: & [u8], type_choose: usize) -> Result<Box<Vec<u8>>, usize> {
+    if scalar.len() != 32 {
+        Err(consts::LENGTH_ERROR)
+    } else {
+        match type_choose {
+            consts::ECC_CURVE_SECP256K1 | consts::ECC_CURVE_SECP256R1 => {
+                if point_in.len() != 64 {
+                    Err(consts::LENGTH_ERROR)
+                } else {
+                    let point_out:[u8; 64] = [0; 64];
+                    let ret_code = unsafe {
+                        ffi::ECC_point_mul_baseG_add(point_in.as_ptr() as uintptr_t, scalar.as_ptr() as uintptr_t, point_out.as_ptr() as uintptr_t, type_choose as c_uint)
+                    };
+                    if ret_code as usize != consts::SUCCESS {
+                        Err(ret_code as usize)
+                    } else {
+                        Ok(Box::new(point_out.to_vec()))
+                    }
+                }
+            }
+            consts::ECC_CURVE_ED25519 => {
+                if point_in.len() != 32 {
+                    Err(consts::LENGTH_ERROR)
+                } else {
+                    let point_out:[u8; 32] = [0; 32];
+                    let ret_code = unsafe {
+                        ffi::ECC_point_mul_baseG_add(point_in.as_ptr() as uintptr_t, scalar.as_ptr() as uintptr_t, point_out.as_ptr() as uintptr_t, type_choose as c_uint)
+                    };
+                    if ret_code as usize != consts::SUCCESS {
+                        Err(ret_code as usize)
+                    } else {
+                        Ok(Box::new(point_out.to_vec()))
+                    }
+                }
+            }
+            _ => Err(consts::ECC_WRONG_TYPE)
+        }
+    }
+}
+
+pub fn point_compress(point: & [u8], type_choose: usize) -> Result<Box<Vec<u8>>, usize> {
+    if point.len() != 64 || point.len() != 65 {
+        Err(consts::LENGTH_ERROR)
+    } else {
+        if type_choose != consts::ECC_CURVE_SECP256R1 || type_choose != consts::ECC_CURVE_SECP256K1 || type_choose != consts::ECC_CURVE_SM2_STANDARD {
+            Err(consts::ECC_WRONG_TYPE)
+        } else {
+            let point_out:[u8; 33] = [0; 33];
+            let ret_code = unsafe {
+                ffi::ECC_point_compress(point.as_ptr() as uintptr_t, point.len() as c_ushort, point_out.as_ptr() as uintptr_t, type_choose as c_uint)
+            };
+            if ret_code as usize != consts::SUCCESS {
+                Err(ret_code as usize)
+            } else {
+                Ok(Box::new(point_out.to_vec()))
+            }
+        }
+    }
+}
+
+pub fn point_decompress(point: & [u8], type_choose: usize) -> Result<Box<Vec<u8>>, usize> {
+    if point.len() != 33 {
+        Err(consts::LENGTH_ERROR)
+    } else {
+        if type_choose != consts::ECC_CURVE_SECP256R1 || type_choose != consts::ECC_CURVE_SECP256K1 || type_choose != consts::ECC_CURVE_SM2_STANDARD {
+            Err(consts::ECC_WRONG_TYPE)
+        } else {
+            let point_out:[u8; 65] = [0; 65];
+            let ret_code = unsafe {
+                ffi::ECC_point_decompress(point.as_ptr() as uintptr_t, point.len() as c_ushort, point_out.as_ptr() as uintptr_t, type_choose as c_uint)
+            };
+            if ret_code as usize != consts::SUCCESS {
+                Err(ret_code as usize)
+            } else {
+                Ok(Box::new(point_out.to_vec()))
+            }
+        }
+    }
+}
+
+pub fn public_key_recover(signature: & [u8], message: & [u8], type_choose: usize) -> Result<Box<Vec<u8>>, usize> {
+    if signature.len() != 65 || message.len() != 32 {
+        Err(consts::LENGTH_ERROR)
+    } else {
+        if type_choose != consts::ECC_CURVE_SECP256R1 || type_choose != consts::ECC_CURVE_SECP256K1 {
+            Err(consts::ECC_WRONG_TYPE)
+        } else {
+            let public_key:[u8; 64] = [0; 64];
+            let ret_code = unsafe {
+                ffi::ECC_recover_pubkey(signature.as_ptr() as uintptr_t,
+                                        signature.len() as c_ushort,
+                                        message.as_ptr() as uintptr_t,
+                                        message.len() as c_ushort,
+                                        public_key.as_ptr() as uintptr_t,
+                                        type_choose as c_uint)
+            };
+
+            if ret_code as usize != consts::SUCCESS {
+                Err(ret_code as usize)
+            } else {
+                Ok(Box::new(public_key.to_vec()))
+            }
+        }
+    }
+}
+
+pub fn curve25519_x_to_ed(x: & [u8]) -> Result<Box<Vec<u8>>, usize> {
+    if x.len() != 32 {
+        Err(consts::LENGTH_ERROR)
+    } else {
+        let ed:[u8;32] = [0;32];
+        let ret_code = unsafe {
+            ffi::CURVE25519_convert_X_to_Ed(ed.as_ptr() as uintptr_t, x.as_ptr() as uintptr_t)
+        };
+        if ret_code as usize != consts::SUCCESS {
+            Err(ret_code as usize)
+        } else {
+            Ok(Box::new(ed.to_vec()))
+        }
+    }
+}
+
+pub fn curve25519_ed_to_x(ed: & [u8]) -> Result<Box<Vec<u8>>, usize> {
+    if ed.len() != 32 {
+        Err(consts::LENGTH_ERROR)
+    } else {
+        let x:[u8;32] = [0;32];
+        let ret_code = unsafe {
+            ffi::CURVE25519_convert_Ed_to_X(x.as_ptr() as uintptr_t, ed.as_ptr() as uintptr_t)
+        };
+        if ret_code as usize != consts::SUCCESS {
+            Err(ret_code as usize)
+        } else {
+            Ok(Box::new(x.to_vec()))
         }
     }
 }

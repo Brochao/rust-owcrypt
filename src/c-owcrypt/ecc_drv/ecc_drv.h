@@ -32,6 +32,7 @@ typedef struct
     uint8_ow *x;
     uint8_ow *y;
     uint8_ow *n;
+    uint8_ow *half;
 }ECC_CURVE_PARAM;
 
 typedef struct

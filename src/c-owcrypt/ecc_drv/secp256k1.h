@@ -25,9 +25,9 @@ void secp256k1_get_order(uint8_ow *order);
 
 uint16_ow secp256k1_genPubkey(uint8_ow *prikey, uint8_ow *pubkey);
 //uint16_ow secp256k1_sign(uint8_ow *prikey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig);
-uint16_ow secp256k1_sign(uint8_ow *prikey, uint8_ow *message, uint16_ow message_len,uint8_ow *rand,uint8_ow hash_flag, uint8_ow *sig);
+uint16_ow secp256k1_sign(uint8_ow *prikey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig, uint8_ow *v);
 //uint16_ow secp256k1_verify(uint8_ow *pubkey, uint8_ow *message, uint16_ow message_len, uint8_ow *sig);
-uint16_ow secp256k1_verify(uint8_ow *pubkey, uint8_ow *message, uint16_ow message_len, uint8_ow hash_flag,uint8_ow *sig);
+uint16_ow secp256k1_verify(uint8_ow *pubkey, uint8_ow *message, uint16_ow message_len,uint8_ow *sig);
 
 /*
  @function:(Point) outpoint_buf= (Point)inputpoint1_buf+[k](Point)inputpoint2_buf

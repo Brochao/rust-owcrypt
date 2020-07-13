@@ -52,7 +52,7 @@
 */
 uint16_ow ECC_preprocess_randomnum(uint8_ow *rand);
 uint16_ow ECC_genPubkey(uint8_ow *prikey, uint8_ow *pubkey, uint32_ow type);
-uint16_ow ECC_sign(uint8_ow *prikey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len, uint8_ow *sig, uint32_ow type);
+uint16_ow ECC_sign(uint8_ow *prikey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len, uint8_ow *sig, uint8_t *v, uint32_ow type);
 uint16_ow ECC_verify(uint8_ow *pubkey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *message, uint16_ow message_len, uint8_ow *sig, uint32_ow type);
 uint16_ow ECC_enc(uint8_ow *pubkey, uint8_ow *plain, uint16_ow plain_len, uint8_ow *cipher, uint16_ow *cipher_len, uint32_ow type);
 uint16_ow ECC_dec(uint8_ow *prikey, uint8_ow *cipher, uint16_ow cipher_len, uint8_ow *plain, uint16_ow *plain_len, uint32_ow type);
