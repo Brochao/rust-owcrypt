@@ -4,6 +4,7 @@ extern crate cc;
 #[allow(unused_variables)]
 fn main() {
     let mut clib_config = cc::Build::new();
+    // clib_config.include("/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include");
     clib_config.include("src/c-owcrypt/bignum");
     clib_config.file("src/c-owcrypt/bignum/bignum.c")
         .file("src/c-owcrypt/bignum/bigrand.c");

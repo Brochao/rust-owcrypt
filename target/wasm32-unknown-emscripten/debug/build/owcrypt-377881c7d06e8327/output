@@ -1,0 +1,144 @@
+TARGET = Some("wasm32-unknown-emscripten")
+OPT_LEVEL = Some("0")
+HOST = Some("x86_64-apple-darwin")
+CC_wasm32-unknown-emscripten = None
+CC_wasm32_unknown_emscripten = None
+TARGET_CC = None
+CC = None
+CFLAGS_wasm32-unknown-emscripten = None
+CFLAGS_wasm32_unknown_emscripten = None
+TARGET_CFLAGS = None
+CFLAGS = None
+CRATE_CC_NO_DEFAULTS = None
+DEBUG = Some("true")
+CARGO_CFG_TARGET_FEATURE = None
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/bignum/bignum.o" "-c" "src/c-owcrypt/bignum/bignum.c"
+cargo:warning=src/c-owcrypt/bignum/bignum.c:129:47: warning: unused parameter 'alen' [-Wunused-parameter]
+cargo:warning=uint8_ow get_bit_value(uint8_ow *a, uint16_ow alen, uint16_ow index)
+cargo:warning=                                              ^
+cargo:warning=1 warning generated.
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/bignum/bigrand.o" "-c" "src/c-owcrypt/bignum/bigrand.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/crypto/ecc_set.o" "-c" "src/c-owcrypt/crypto/ecc_set.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/crypto/hash_set.o" "-c" "src/c-owcrypt/crypto/hash_set.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/CURVE25519.o" "-c" "src/c-owcrypt/ecc_drv/CURVE25519.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/ecc_drv.o" "-c" "src/c-owcrypt/ecc_drv/ecc_drv.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/ECDSA.o" "-c" "src/c-owcrypt/ecc_drv/ECDSA.c"
+cargo:warning=src/c-owcrypt/ecc_drv/ECDSA.c:182:84: warning: unused parameter 'sig_len' [-Wunused-parameter]
+cargo:warning=uint16_ow ECDSA_recover_public(ECC_CURVE_PARAM *curveParam,uint8_ow *sig,uint32_ow sig_len,uint8_ow *msg,uint32_ow msg_len,uint8_ow hash_flag,uint8_ow *pubkey)
+cargo:warning=                                                                                   ^
+cargo:warning=1 warning generated.
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/secp256k1.o" "-c" "src/c-owcrypt/ecc_drv/secp256k1.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/secp256r1.o" "-c" "src/c-owcrypt/ecc_drv/secp256r1.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/sm2.o" "-c" "src/c-owcrypt/ecc_drv/sm2.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/blake2b.o" "-c" "src/c-owcrypt/hash_drv/blake2b.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/blake2s.o" "-c" "src/c-owcrypt/hash_drv/blake2s.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/blake256.o" "-c" "src/c-owcrypt/hash_drv/blake256.c"
+cargo:warning=src/c-owcrypt/hash_drv/blake256.c:171:13: warning: comparison of integers of different signs: 'uint32_ow' (aka 'unsigned int') and 'int' [-Wsign-compare]
+cargo:warning=    if ( lo < ( ctx->buflen << 3 ) ) hi++;
+cargo:warning=         ~~ ^   ~~~~~~~~~~~~~~~~
+cargo:warning=1 warning generated.
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/blake512.o" "-c" "src/c-owcrypt/hash_drv/blake512.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/hmac.o" "-c" "src/c-owcrypt/hash_drv/hmac.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/keccak256.o" "-c" "src/c-owcrypt/hash_drv/keccak256.c"
+cargo:warning=src/c-owcrypt/hash_drv/keccak256.c:228:63: warning: comparison of integers of different signs: 'uint32_ow' (aka 'unsigned int') and 'int' [-Wsign-compare]
+cargo:warning=        memcpy((uint8_ow*)ctx->message + index, msg, (msg_len < left ? msg_len : left));
+cargo:warning=                                                      ~~~~~~~ ^ ~~~~
+cargo:warning=src/c-owcrypt/hash_drv/keccak256.c:229:21: warning: comparison of integers of different signs: 'uint32_ow' (aka 'unsigned int') and 'int' [-Wsign-compare]
+cargo:warning=        if (msg_len < left)
+cargo:warning=            ~~~~~~~ ^ ~~~~
+cargo:warning=src/c-owcrypt/hash_drv/keccak256.c:280:23: warning: comparison of integers of different signs: 'const uint32_ow' (aka 'const unsigned int') and 'int' [-Wsign-compare]
+cargo:warning=    assert(block_size > digest_length);
+cargo:warning=           ~~~~~~~~~~ ^ ~~~~~~~~~~~~~
+cargo:warning=/Users/heshuchao/Downloads/emsdk/upstream/emscripten/system/include/libc/assert.h:8:28: note: expanded from macro 'assert'
+cargo:warning=#define assert(x) ((void)((x) || (__assert_fail(#x, __FILE__, __LINE__, __func__),0)))
+cargo:warning=                           ^
+cargo:warning=3 warnings generated.
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/keccak512.o" "-c" "src/c-owcrypt/hash_drv/keccak512.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/md4.o" "-c" "src/c-owcrypt/hash_drv/md4.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/md5.o" "-c" "src/c-owcrypt/hash_drv/md5.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/pbkdf2.o" "-c" "src/c-owcrypt/hash_drv/pbkdf2.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/ripemd160.o" "-c" "src/c-owcrypt/hash_drv/ripemd160.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sha1.o" "-c" "src/c-owcrypt/hash_drv/sha1.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sha3_256.o" "-c" "src/c-owcrypt/hash_drv/sha3_256.c"
+cargo:warning=src/c-owcrypt/hash_drv/sha3_256.c:240:62: warning: comparison of integers of different signs: 'uint32_ow' (aka 'unsigned int') and 'int' [-Wsign-compare]
+cargo:warning=        memcpy((uint8_ow*)ctx->message + index, msg, (msglen < left ? msglen : left));
+cargo:warning=                                                      ~~~~~~ ^ ~~~~
+cargo:warning=src/c-owcrypt/hash_drv/sha3_256.c:241:20: warning: comparison of integers of different signs: 'uint32_ow' (aka 'unsigned int') and 'int' [-Wsign-compare]
+cargo:warning=        if (msglen < left)
+cargo:warning=            ~~~~~~ ^ ~~~~
+cargo:warning=src/c-owcrypt/hash_drv/sha3_256.c:292:23: warning: comparison of integers of different signs: 'const uint32_ow' (aka 'const unsigned int') and 'int' [-Wsign-compare]
+cargo:warning=    assert(block_size > digest_length);
+cargo:warning=           ~~~~~~~~~~ ^ ~~~~~~~~~~~~~
+cargo:warning=/Users/heshuchao/Downloads/emsdk/upstream/emscripten/system/include/libc/assert.h:8:28: note: expanded from macro 'assert'
+cargo:warning=#define assert(x) ((void)((x) || (__assert_fail(#x, __FILE__, __LINE__, __func__),0)))
+cargo:warning=                           ^
+cargo:warning=3 warnings generated.
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sha3_512.o" "-c" "src/c-owcrypt/hash_drv/sha3_512.c"
+cargo:warning=src/c-owcrypt/hash_drv/sha3_512.c:238:63: warning: comparison of integers of different signs: 'uint32_ow' (aka 'unsigned int') and 'int' [-Wsign-compare]
+cargo:warning=        memcpy((uint8_ow*)ctx->message + index, msg, (msg_len < left ? msg_len : left));
+cargo:warning=                                                      ~~~~~~~ ^ ~~~~
+cargo:warning=src/c-owcrypt/hash_drv/sha3_512.c:239:21: warning: comparison of integers of different signs: 'uint32_ow' (aka 'unsigned int') and 'int' [-Wsign-compare]
+cargo:warning=        if (msg_len < left)
+cargo:warning=            ~~~~~~~ ^ ~~~~
+cargo:warning=src/c-owcrypt/hash_drv/sha3_512.c:290:23: warning: comparison of integers of different signs: 'const uint32_ow' (aka 'const unsigned int') and 'int' [-Wsign-compare]
+cargo:warning=    assert(block_size > digest_length);
+cargo:warning=           ~~~~~~~~~~ ^ ~~~~~~~~~~~~~
+cargo:warning=/Users/heshuchao/Downloads/emsdk/upstream/emscripten/system/include/libc/assert.h:8:28: note: expanded from macro 'assert'
+cargo:warning=#define assert(x) ((void)((x) || (__assert_fail(#x, __FILE__, __LINE__, __func__),0)))
+cargo:warning=                           ^
+cargo:warning=3 warnings generated.
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sha256.o" "-c" "src/c-owcrypt/hash_drv/sha256.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sha512.o" "-c" "src/c-owcrypt/hash_drv/sha512.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sm3.o" "-c" "src/c-owcrypt/hash_drv/sm3.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/owcrypt_core/owc_algorithm.o" "-c" "src/c-owcrypt/owcrypt_core/owc_algorithm.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/owcrypt_core/owc_alloc.o" "-c" "src/c-owcrypt/owcrypt_core/owc_alloc.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/owcrypt_core/owc_core.o" "-c" "src/c-owcrypt/owcrypt_core/owc_core.c"
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/owcrypt_core/owc_curve.o" "-c" "src/c-owcrypt/owcrypt_core/owc_curve.c"
+cargo:warning=src/c-owcrypt/owcrypt_core/owc_curve.c:375:9: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+cargo:warning=        if (owc_compare(a->X,b->X)==0 && owc_compare(a->Y,b->Y)==0)
+cargo:warning=        ^
+cargo:warning=src/c-owcrypt/owcrypt_core/owc_curve.c:373:5: note: previous statement is here
+cargo:warning=    if (b->marker==OWC_POINT_INFINITY)
+cargo:warning=    ^
+cargo:warning=1 warning generated.
+exit code: 0
+running: "emcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-I" "src/c-owcrypt/bignum" "-I" "src/c-owcrypt/crypto" "-I" "src/c-owcrypt/ecc_drv" "-I" "src/c-owcrypt/hash_drv" "-I" "src/c-owcrypt/owcrypt_core" "-Wall" "-Wextra" "-o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/owcrypt_core/owc_montgamery.o" "-c" "src/c-owcrypt/owcrypt_core/owc_montgamery.c"
+exit code: 0
+AR_wasm32-unknown-emscripten = None
+AR_wasm32_unknown_emscripten = None
+TARGET_AR = None
+AR = None
+running: "emar" "crs" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/libowcrypt.a" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/bignum/bignum.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/bignum/bigrand.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/crypto/ecc_set.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/crypto/hash_set.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/CURVE25519.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/ecc_drv.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/ECDSA.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/secp256k1.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/secp256r1.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/ecc_drv/sm2.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/blake2b.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/blake2s.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/blake256.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/blake512.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/hmac.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/keccak256.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/keccak512.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/md4.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/md5.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/pbkdf2.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/ripemd160.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sha1.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sha3_256.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sha3_512.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sha256.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sha512.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/hash_drv/sm3.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/owcrypt_core/owc_algorithm.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/owcrypt_core/owc_alloc.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/owcrypt_core/owc_core.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/owcrypt_core/owc_curve.o" "/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out/src/c-owcrypt/owcrypt_core/owc_montgamery.o"
+exit code: 0
+cargo:rustc-link-lib=static=owcrypt
+cargo:rustc-link-search=native=/Users/heshuchao/workspace/rust-workspace/rust-owcrypt/target/wasm32-unknown-emscripten/debug/build/owcrypt-377881c7d06e8327/out

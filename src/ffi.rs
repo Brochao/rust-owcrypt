@@ -7,7 +7,9 @@ use libc::{
 
 
 #[link(name = "owcrypt")]
-extern {
+extern "C" {
+
+    pub(crate) fn hash(message: uintptr_t, message_length: c_ushort, digest: uintptr_t, digest_length: c_ushort, type_choose: c_uint);
     pub(crate) fn ECC_genPubkey(private_key: uintptr_t,public_key:uintptr_t, type_choose: c_uint) -> c_ushort;
     pub(crate) fn ECC_sign(private_key: uintptr_t, id: uintptr_t, id_length: c_ushort, message: uintptr_t, message_length: c_ushort, signature: uintptr_t, v: uintptr_t, type_choose: c_uint) -> c_ushort;
     pub(crate) fn ECC_verify(public_key: uintptr_t, id: uintptr_t, id_length: c_ushort, message: uintptr_t, message_length: c_ushort, signature: uintptr_t, type_choose: c_uint) -> c_ushort;
