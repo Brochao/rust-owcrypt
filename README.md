@@ -1,8 +1,15 @@
 # owcrypt
 
 A Rust version for BlockTree's owcrypt library
+# Tips
+
+version 0.0.3 is just a test version for wasm.
+the wasm file can be located [here](https://github.com/Brochao/rust-owcrypt/tree/master/target/wasm32-unknown-emscripten/debug).
+which is built as target `wasm32-unknown-emscripten`
 
 [golang version](https://github.com/blocktree/go-owcrypt)
+
+
 [c version](https://github.com/blocktree/owcrypt)
 
 ## Using owcrypt
